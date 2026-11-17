@@ -70,6 +70,7 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 		this.createSafPreferences();
 		this.createOutputPortPreferences();
 		this.createViewPreferences();
+		this.createAppearancePreferences();
 	}
 
 	@Override
@@ -104,6 +105,14 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 	public void createSafPreferences() {
 		CheckBoxPreference checkBoxPreference = (CheckBoxPreference) this.findPreference(TGStorageProperties.PROPERTY_COLLECTION_BROWSER);
 		checkBoxPreference.setChecked(new TGStorageProperties(this.findContext()).isUseCollectionBrowser());
+	}
+
+	/** The appearance options always start from what the score view really uses (default: smooth cursor on). */
+	private void createAppearancePreferences() {
+		androidx.preference.TwoStatePreference smooth = (androidx.preference.TwoStatePreference) this.findPreference(app.tuxguitar.android.view.tablature.TGViewSettings.KEY_SMOOTH_CURSOR);
+		if( smooth != null ) {
+			smooth.setChecked(app.tuxguitar.android.view.tablature.TGViewSettings.isSmoothCursor(this.getActivity()));
+		}
 	}
 
 	public void createViewPreferences() {

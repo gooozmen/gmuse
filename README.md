@@ -6,6 +6,19 @@ gmuse is an Android tablature player and editor with a modern, touch-first inter
 It is a fork of [TuxGuitar](https://github.com/helge17/tuxguitar): the score engine, file formats
 and synthesizer come from TuxGuitar. gmuse rebuilds the Android app around them.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/01-main.png" width="23%" alt="Score with floating buttons and the playback sheet">
+  <img src="docs/screenshots/02-tempo.png" width="23%" alt="Tempo menu growing out of the tempo chip">
+  <img src="docs/screenshots/03-settings.png" width="23%" alt="Settings menu with the Appearance section">
+  <img src="docs/screenshots/04-loop.png" width="23%" alt="Loop panel in the bottom sheet">
+</p>
+
+Split bars: with "Into 2 parts" a bar takes two full lines, joined by a dashed line.
+
+<p align="center"><img src="docs/screenshots/05-split.png" width="30%" alt="A bar split over two lines"></p>
+
 ## What gmuse changes
 
 **Look and feel**
