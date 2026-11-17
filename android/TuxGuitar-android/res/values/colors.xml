@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--
+		Fallback tonal palette (light), used below Android 12.
+		On Android 12+ these roles are replaced at runtime by the palette
+		derived from the user's wallpaper (see TGApplication).
+	-->
+	<color name="md_primary">#825500</color>
+	<color name="md_on_primary">#FFFFFF</color>
+	<color name="md_primary_container">#FFDDB3</color>
+	<color name="md_on_primary_container">#291800</color>
+	<color name="md_primary_inverse">#FFB951</color>
+
+	<color name="md_secondary">#6F5B40</color>
+	<color name="md_on_secondary">#FFFFFF</color>
+	<color name="md_secondary_container">#FBDEBC</color>
+	<color name="md_on_secondary_container">#271904</color>
+
+	<color name="md_tertiary">#51643F</color>
+	<color name="md_on_tertiary">#FFFFFF</color>
+	<color name="md_tertiary_container">#D4EABB</color>
+	<color name="md_on_tertiary_container">#102004</color>
+
+	<color name="md_error">#BA1A1A</color>
+	<color name="md_on_error">#FFFFFF</color>
+	<color name="md_error_container">#FFDAD6</color>
+	<color name="md_on_error_container">#410002</color>
+
+	<color name="md_surface">#FFF8F4</color>
+	<color name="md_on_surface">#1F1B16</color>
+	<color name="md_surface_variant">#F0E0CF</color>
+	<color name="md_on_surface_variant">#4F4539</color>
+	<color name="md_outline">#817567</color>
+	<color name="md_outline_variant">#D3C4B4</color>
+	<color name="md_surface_inverse">#34302A</color>
+	<color name="md_on_surface_inverse">#F9EFE7</color>
+
+	<color name="md_surface_dim">#E2D8D0</color>
+	<color name="md_surface_bright">#FFF8F4</color>
+	<color name="md_surface_container_lowest">#FFFFFF</color>
+	<color name="md_surface_container_low">#FCF2E9</color>
+	<color name="md_surface_container">#F6ECE3</color>
+	<color name="md_surface_container_high">#F1E7DE</color>
+	<color name="md_surface_container_highest">#EBE1D8</color>
+</resources>

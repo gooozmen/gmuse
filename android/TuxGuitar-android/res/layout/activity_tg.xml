@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app.tuxguitar.android.view.layout.TGSingleFragmentLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/root_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<!-- Insets (status / navigation bars) are applied in code, see TGActivity.applyInsets -->
+	<LinearLayout
+		android:id="@+id/app_content_column"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/app_toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/colorSurfaceContainer"
+			android:minHeight="?attr/actionBarSize"/>
+
+		<FrameLayout
+			android:id="@+id/content_frame"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/left_drawer"
+		android:layout_width="240dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		android:drawSelectorOnTop="false" />
+
+</app.tuxguitar.android.view.layout.TGSingleFragmentLayout>

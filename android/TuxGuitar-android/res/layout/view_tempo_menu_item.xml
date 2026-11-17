@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tempo_display_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableTint="?attr/colorOnSecondaryContainer"
+    android:textColor="?attr/colorOnSecondaryContainer"
+    android:fontFamily="sans-serif-medium"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="14dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:background="@drawable/bg_tempo_pill"
+/>

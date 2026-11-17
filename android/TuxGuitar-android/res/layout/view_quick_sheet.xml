@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app.tuxguitar.android.view.sheet.TGQuickSheet xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tgQuickSheet"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_quick_sheet"
+	android:clickable="true"
+	android:elevation="3dp"
+	android:focusable="true"
+	android:orientation="vertical"
+	android:paddingTop="4dp"
+	android:paddingLeft="8dp"
+	android:paddingRight="8dp"
+	android:paddingBottom="8dp">
+
+	<View
+		android:id="@+id/quick_sheet_handle"
+		android:layout_width="36dp"
+		android:layout_height="4dp"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="6dp"
+		android:layout_marginBottom="6dp"
+		android:background="@drawable/bg_quick_sheet_handle"/>
+
+	<!-- Shown instead of the tiles while an editor (keyboard / menus) owns the sheet -->
+	<LinearLayout
+		android:id="@+id/quick_sheet_takeover_header"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingLeft="12dp"
+		android:paddingRight="4dp"
+		android:visibility="gone">
+
+		<TextView
+			android:id="@+id/quick_sheet_takeover_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:textSize="14sp"
+			style="@style/TGQuickSheetLabel"/>
+
+		<ImageButton
+			android:id="@+id/quick_sheet_takeover_close"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:padding="8dp"
+			android:background="@drawable/bg_toggle_pill"
+			android:contentDescription="@string/global_button_cancel"
+			android:src="@drawable/ic_tile_close"
+			android:tint="?attr/colorOnSurfaceVariant"/>
+	</LinearLayout>
+
+	<include
+		android:id="@+id/tgTrackTape"
+		layout="@layout/view_track_tape"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="gone"/>
+
+	<!-- Hero card: what is playing, how fast, and the one big action -->
+	<LinearLayout
+		android:id="@+id/quick_sheet_hero"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingLeft="16dp"
+		android:paddingRight="12dp"
+		android:paddingTop="12dp"
+		android:paddingBottom="12dp">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/quick_sheet_tempo_value"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-black"
+					android:text="120"
+					android:textColor="?attr/colorOnSurface"
+					android:textSize="30sp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="4dp"
+					android:fontFamily="sans-serif-medium"
+					android:text="@string/quick_sheet_bpm"
+					android:textColor="?attr/colorOnSurfaceVariant"
+					android:textSize="13sp"/>
+
+				<LinearLayout
+					android:id="@+id/quick_sheet_speed_toggle"
+					android:layout_width="wrap_content"
+					android:layout_height="28dp"
+					android:layout_marginLeft="12dp"
+					android:background="@drawable/bg_chip_tonal"
+					android:clickable="true"
+					android:focusable="true"
+					android:contentDescription="@string/quick_sheet_speed"
+					android:gravity="center"
+					android:orientation="horizontal"
+					android:paddingLeft="12dp"
+					android:paddingRight="12dp">
+
+					<TextView
+						android:id="@+id/quick_sheet_speed_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:duplicateParentState="true"
+						android:fontFamily="sans-serif-medium"
+						android:text="100%"
+						android:textColor="@color/tg_tile_content"
+						android:textSize="12sp"/>
+				</LinearLayout>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/quick_sheet_track_name"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?attr/colorOnSurfaceVariant"
+				android:textSize="12sp"/>
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/quick_sheet_play"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+			android:clickable="true"
+			android:focusable="true"
+			android:contentDescription="@string/action_transport_play"
+			android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+			<View
+				android:id="@+id/quick_sheet_play_shape"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@drawable/shape_scallop"/>
+
+			<ImageView
+				android:id="@+id/quick_sheet_play_icon"
+				android:layout_width="26dp"
+				android:layout_height="26dp"
+				android:layout_gravity="center"
+				android:importantForAccessibility="no"
+				android:src="@drawable/ic_tile_play"
+				android:tint="?attr/colorOnPrimary"/>
+		</FrameLayout>
+	</LinearLayout>
+
+	<!-- Row 1: always visible -->
+	<LinearLayout
+		android:id="@+id/quick_sheet_peek"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_tracks_toggle"
+			android:contentDescription="@string/quick_sheet_tracks"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_music_note_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_tracks"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_mixer_toggle"
+			android:contentDescription="@string/quick_sheet_mixer"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_volume_up_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_mixer"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_loop_toggle"
+			android:contentDescription="@string/quick_sheet_loop"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_tile_loop"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_loop"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_metronome"
+			android:contentDescription="@string/action_transport_metronome"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_metronome_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_tile_metronome"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_metronome_volume_row"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingLeft="12dp"
+		android:paddingRight="8dp"
+		android:visibility="gone">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="8dp"
+			android:text="@string/action_transport_metronome"
+			android:textColor="?attr/colorOnSurface"
+			android:textSize="12sp"/>
+
+		<SeekBar
+			android:id="@+id/quick_sheet_metronome_volume"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:max="127"/>
+	</LinearLayout>
+
+	<include
+		android:id="@+id/tgTabKeyboard"
+		layout="@layout/view_tab_keyboard"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="gone"/>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_tracks"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:paddingBottom="2dp"
+			android:text="@string/quick_sheet_tracks"
+			android:textSize="12sp"
+			style="@style/TGQuickSheetLabel"/>
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/quick_sheet_tracks_scroll"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:overScrollMode="never">
+
+			<LinearLayout
+				android:id="@+id/quick_sheet_tracks_items"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"/>
+		</androidx.core.widget.NestedScrollView>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_mixer"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:paddingBottom="2dp"
+			android:text="@string/quick_sheet_mixer"
+			android:textSize="12sp"
+			style="@style/TGQuickSheetLabel"/>
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/quick_sheet_mixer_scroll"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:overScrollMode="never">
+
+			<LinearLayout
+				android:id="@+id/quick_sheet_mixer_items"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"/>
+		</androidx.core.widget.NestedScrollView>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_loop"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<!-- Header: title + on/off -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="16dp"
+			android:paddingRight="8dp">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/quick_sheet_loop"
+				android:textSize="12sp"
+				style="@style/TGQuickSheetLabel"/>
+
+			<com.google.android.material.materialswitch.MaterialSwitch
+				android:id="@+id/quick_sheet_loop_enable"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:minHeight="0dp"
+				android:contentDescription="@string/transport_mode_dlg_simple_loop"/>
+		</LinearLayout>
+
+		<!-- What is looped / what to tap next -->
+		<TextView
+			android:id="@+id/quick_sheet_loop_hint"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:paddingBottom="6dp"
+			android:textColor="?attr/colorOnSurface"
+			android:textSize="16sp"
+			android:fontFamily="sans-serif-medium"/>
+
+		<!-- Fine-tune the range bar by bar -->
+		<LinearLayout
+			android:id="@+id/quick_sheet_loop_range"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="12dp"
+			android:paddingRight="12dp"
+			android:paddingBottom="6dp">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingLeft="4dp"
+				android:paddingRight="6dp"
+				android:text="@string/quick_sheet_loop_start"
+				android:textColor="?attr/colorOnSurfaceVariant"
+				android:textSize="12sp"/>
+
+			<Button
+				android:id="@+id/quick_sheet_loop_start_minus"
+				android:layout_width="36dp"
+				android:layout_height="32dp"
+				android:text="-"
+				style="@style/TGQuickSheetTonalButton"/>
+
+			<TextView
+				android:id="@+id/quick_sheet_loop_start_value"
+				android:layout_width="36dp"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="16sp"
+				android:fontFamily="sans-serif-medium"/>
+
+			<Button
+				android:id="@+id/quick_sheet_loop_start_plus"
+				android:layout_width="36dp"
+				android:layout_height="32dp"
+				android:text="+"
+				style="@style/TGQuickSheetTonalButton"/>
+
+			<Space
+				android:layout_width="0dp"
+				android:layout_height="1dp"
+				android:layout_weight="1"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingRight="6dp"
+				android:text="@string/quick_sheet_loop_end"
+				android:textColor="?attr/colorOnSurfaceVariant"
+				android:textSize="12sp"/>
+
+			<Button
+				android:id="@+id/quick_sheet_loop_end_minus"
+				android:layout_width="36dp"
+				android:layout_height="32dp"
+				android:text="-"
+				style="@style/TGQuickSheetTonalButton"/>
+
+			<TextView
+				android:id="@+id/quick_sheet_loop_end_value"
+				android:layout_width="36dp"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="16sp"
+				android:fontFamily="sans-serif-medium"/>
+
+			<Button
+				android:id="@+id/quick_sheet_loop_end_plus"
+				android:layout_width="36dp"
+				android:layout_height="32dp"
+				android:text="+"
+				style="@style/TGQuickSheetTonalButton"/>
+		</LinearLayout>
+
+		<!-- Actions -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="8dp"
+			android:paddingRight="8dp"
+			android:paddingTop="4dp">
+
+			<Button
+				android:id="@+id/quick_sheet_loop_pick"
+				android:layout_width="0dp"
+				android:layout_height="36dp"
+				android:layout_weight="1"
+				android:layout_marginRight="4dp"
+				android:text="@string/quick_sheet_loop_select"
+				style="@style/TGQuickSheetFilledButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_loop_clear"
+				android:layout_width="0dp"
+				android:layout_height="36dp"
+				android:layout_weight="1"
+				android:layout_marginLeft="4dp"
+				android:text="@string/quick_sheet_loop_clear"
+				style="@style/TGQuickSheetTonalButton"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_speed"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:paddingBottom="2dp"
+			android:text="@string/quick_sheet_speed"
+			android:textSize="12sp"
+			style="@style/TGQuickSheetLabel"/>
+
+		<!-- Tempo of the song at the caret (or while playing), with the editor one tap away -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="16dp"
+			android:paddingRight="8dp"
+			android:paddingBottom="4dp">
+
+			<TextView
+				android:id="@+id/quick_sheet_tempo_label"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:drawablePadding="4dp"
+				android:drawableTint="?attr/colorOnSurface"
+				android:fontFamily="sans-serif-medium"
+				android:gravity="center_vertical"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="18sp"/>
+
+			<Button
+				android:id="@+id/quick_sheet_tempo_edit"
+				android:layout_width="wrap_content"
+				android:layout_height="36dp"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp"
+				android:text="@string/action_change_tempo"
+				style="@style/TGQuickSheetTonalButton"/>
+		</LinearLayout>
+
+		<HorizontalScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:scrollbars="none">
+
+			<LinearLayout
+				android:id="@+id/quick_sheet_speed_items"
+				android:layout_width="wrap_content"
+				android:layout_height="40dp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:paddingLeft="12dp"
+				android:paddingRight="12dp"/>
+		</HorizontalScrollView>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/quick_sheet_transpose"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:paddingTop="12dp"
+		android:paddingBottom="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:paddingBottom="2dp"
+			android:text="@string/quick_sheet_transpose"
+			android:textSize="12sp"
+			style="@style/TGQuickSheetLabel"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="horizontal"
+			android:paddingLeft="8dp"
+			android:paddingRight="8dp">
+
+			<Button
+				android:id="@+id/quick_sheet_transpose_minus"
+				android:layout_width="48dp"
+				android:layout_height="36dp"
+				android:text="-"
+				style="@style/TGQuickSheetTonalButton"/>
+
+			<TextView
+				android:id="@+id/quick_sheet_transpose_value"
+				android:layout_width="72dp"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="0"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="16sp"
+				android:textStyle="bold"/>
+
+			<Button
+				android:id="@+id/quick_sheet_transpose_plus"
+				android:layout_width="48dp"
+				android:layout_height="36dp"
+				android:text="+"
+				style="@style/TGQuickSheetTonalButton"/>
+		</LinearLayout>
+
+		<CheckBox
+			android:id="@+id/quick_sheet_transpose_all_tracks"
+			android:layout_width="match_parent"
+			android:layout_height="36dp"
+			android:checked="true"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:text="@string/quick_sheet_transpose_all_tracks"
+			android:textColor="?attr/textLightColorSelector"/>
+
+		<Button
+			android:id="@+id/quick_sheet_transpose_apply"
+			android:layout_width="match_parent"
+			android:layout_height="36dp"
+			android:text="@string/quick_sheet_transpose_apply"
+			style="@style/TGQuickSheetFilledButton"/>
+	</LinearLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/quick_sheet_more"
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_card"
+		android:clipToOutline="true"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:fillViewport="false"
+		android:overScrollMode="never"
+		android:visibility="gone">
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_more_items"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingTop="8dp"
+			android:paddingBottom="8dp">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp"
+				android:paddingTop="4dp"
+				android:paddingBottom="4dp"
+				android:text="@string/quick_sheet_play"
+				style="@style/TGQuickSheetLabel"/>
+
+			<Button
+				android:id="@+id/quick_sheet_stop"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_transport_stop"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_play_mode"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_transport_mode"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<CheckBox
+				android:id="@+id/quick_sheet_highlight"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp"
+				android:text="@string/action_transport_highlight_played_beat"
+				android:textColor="?attr/textLightColorSelector"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp"
+				android:paddingTop="12dp"
+				android:paddingBottom="4dp"
+				android:text="@string/quick_sheet_edit"
+				style="@style/TGQuickSheetLabel"/>
+
+			<Button
+				android:id="@+id/quick_sheet_edit"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_edit"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_duration"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_duration"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_dynamic"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_dynamic"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_effects"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_effects"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_beat"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_beat"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_measure"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_measure"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_track"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_track"
+				style="@style/TGQuickSheetMenuButton"/>
+
+			<Button
+				android:id="@+id/quick_sheet_composition"
+				android:layout_width="match_parent"
+				android:layout_height="36dp"
+				android:text="@string/action_menu_composition"
+				style="@style/TGQuickSheetMenuButton"/>
+		</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+
+	<!-- Row 2 (swipe up) -->
+	<LinearLayout
+		android:id="@+id/quick_sheet_row2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_count_in"
+			android:contentDescription="@string/action_transport_count_down"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_count_in_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_tile_count_in"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_transpose_toggle"
+			android:contentDescription="@string/quick_sheet_transpose"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_transpose_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_tile_transpose"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_keyboard"
+			android:contentDescription="@string/action_tab_keyboard_toggle"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_edit_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_edit"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/quick_sheet_more_toggle"
+			android:contentDescription="@string/quick_sheet_more"
+			style="@style/TGQuickSheetTile">
+
+			<ImageView
+				android:src="@drawable/ic_more_white_24dp"
+				style="@style/TGQuickSheetTileIcon"/>
+
+			<TextView
+				android:text="@string/quick_sheet_more"
+				style="@style/TGQuickSheetTileLabel"/>
+		</LinearLayout>
+	</LinearLayout>
+</app.tuxguitar.android.view.sheet.TGQuickSheet>

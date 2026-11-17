@@ -1,0 +1,23 @@
+# Gradle / Android build output
+build/
+.gradle/
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Machine-specific
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Maven (desktop builds)
+target/
+
+# OS
+.DS_Store
+Thumbs.db

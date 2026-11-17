@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="36dp"
+	android:gravity="center_vertical"
+	android:orientation="horizontal"
+	android:paddingLeft="12dp"
+	android:paddingRight="8dp">
+
+	<TextView
+		android:id="@+id/quick_sheet_mixer_name"
+		android:layout_width="72dp"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:maxLines="1"
+		android:textColor="?attr/colorOnSurface"
+		android:textSize="12sp"/>
+
+	<TextView
+		android:id="@+id/quick_sheet_mixer_mute"
+		android:layout_width="28dp"
+		android:layout_height="28dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:gravity="center"
+		android:text="M"
+		android:background="@drawable/bg_mixer_mute"
+		android:textColor="@color/tg_content_mute"
+		android:textSize="12sp"
+		android:textStyle="bold"/>
+
+	<TextView
+		android:id="@+id/quick_sheet_mixer_solo"
+		android:layout_width="28dp"
+		android:layout_height="28dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:gravity="center"
+		android:text="S"
+		android:background="@drawable/bg_mixer_solo"
+		android:textColor="@color/tg_content_solo"
+		android:textSize="12sp"
+		android:textStyle="bold"/>
+
+	<SeekBar
+		android:id="@+id/quick_sheet_mixer_volume"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:max="127"/>
+</LinearLayout>

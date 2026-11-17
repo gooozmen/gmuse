@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Former top-bar tempo item; the tempo now lives in the bottom sheet. Kept so older code paths still resolve. -->
+	<item name="action_tempo_display" type="id"/>
+	<item name="tg_settings_container" type="id"/>
+</resources>

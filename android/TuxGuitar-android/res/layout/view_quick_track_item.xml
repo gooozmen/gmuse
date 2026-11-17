@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/quick_sheet_track_item_name"
+	android:layout_width="match_parent"
+	android:layout_height="36dp"
+	android:gravity="center_vertical"
+	android:paddingLeft="16dp"
+	android:paddingRight="16dp"
+	android:textColor="@color/tg_content_toggle"
+	android:textSize="14sp"
+	android:background="@drawable/bg_list_row"/>

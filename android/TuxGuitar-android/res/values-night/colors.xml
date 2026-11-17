@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Fallback tonal palette (dark), used below Android 12. -->
+	<color name="md_primary">#FFB951</color>
+	<color name="md_on_primary">#452B00</color>
+	<color name="md_primary_container">#633F00</color>
+	<color name="md_on_primary_container">#FFDDB3</color>
+	<color name="md_primary_inverse">#825500</color>
+
+	<color name="md_secondary">#DDC2A1</color>
+	<color name="md_on_secondary">#3E2D16</color>
+	<color name="md_secondary_container">#56442A</color>
+	<color name="md_on_secondary_container">#FBDEBC</color>
+
+	<color name="md_tertiary">#B8CEA1</color>
+	<color name="md_on_tertiary">#243515</color>
+	<color name="md_tertiary_container">#3A4C2A</color>
+	<color name="md_on_tertiary_container">#D4EABB</color>
+
+	<color name="md_error">#FFB4AB</color>
+	<color name="md_on_error">#690005</color>
+	<color name="md_error_container">#93000A</color>
+	<color name="md_on_error_container">#FFDAD6</color>
+
+	<color name="md_surface">#17130E</color>
+	<color name="md_on_surface">#EAE1D9</color>
+	<color name="md_surface_variant">#4F4539</color>
+	<color name="md_on_surface_variant">#D3C4B4</color>
+	<color name="md_outline">#9C8F80</color>
+	<color name="md_outline_variant">#4F4539</color>
+	<color name="md_surface_inverse">#EAE1D9</color>
+	<color name="md_on_surface_inverse">#34302A</color>
+
+	<color name="md_surface_dim">#17130E</color>
+	<color name="md_surface_bright">#3E3832</color>
+	<color name="md_surface_container_lowest">#110E09</color>
+	<color name="md_surface_container_low">#1F1B16</color>
+	<color name="md_surface_container">#231F1A</color>
+	<color name="md_surface_container_high">#2E2924</color>
+	<color name="md_surface_container_highest">#39342E</color>
+</resources>

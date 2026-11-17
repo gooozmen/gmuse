@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tempo_popup_card"
+	android:layout_width="312dp"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_popup"
+	android:elevation="8dp">
+
+	<!-- Page 1: tempo stepper + playback speed -->
+	<LinearLayout
+		android:id="@+id/tempo_popup_page_main"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingTop="20dp"
+		android:paddingBottom="10dp"
+		android:paddingLeft="13dp"
+		android:paddingRight="13dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="3dp"
+			android:paddingRight="3dp">
+
+			<ImageButton
+				android:id="@+id/tempo_popup_minus"
+				android:layout_width="52dp"
+				android:layout_height="52dp"
+				android:background="@drawable/bg_tempo_step"
+				android:contentDescription="-"
+				android:src="@drawable/ic_tempo_minus"
+				android:tint="@color/tg_tile_content"/>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/tempo_popup_value"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-black"
+					android:includeFontPadding="false"
+					android:textColor="?attr/colorOnSurface"
+					android:textSize="40sp"/>
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<ImageView
+						android:id="@+id/tempo_popup_note"
+						android:layout_width="16dp"
+						android:layout_height="16dp"
+						android:importantForAccessibility="no"
+						android:tint="?attr/colorOnSurfaceVariant"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="3dp"
+						android:fontFamily="sans-serif-medium"
+						android:includeFontPadding="false"
+						android:text="@string/quick_sheet_bpm"
+						android:textColor="?attr/colorOnSurfaceVariant"
+						android:textSize="12sp"/>
+				</LinearLayout>
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/tempo_popup_plus"
+				android:layout_width="52dp"
+				android:layout_height="52dp"
+				android:background="@drawable/bg_tempo_step"
+				android:contentDescription="+"
+				android:src="@drawable/ic_tempo_plus"
+				android:tint="@color/tg_tile_content"/>
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="5dp"
+			android:paddingTop="18dp"
+			android:paddingBottom="8dp"
+			android:fontFamily="sans-serif-medium"
+			android:text="@string/quick_sheet_speed"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			android:textSize="12sp"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_speed_items"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_speed_items_2"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="6dp"
+			android:orientation="horizontal"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_more"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:layout_marginTop="8dp"
+			android:background="@drawable/bg_popup_row"
+			android:clickable="true"
+			android:focusable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="8dp"
+			android:paddingRight="6dp">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:duplicateParentState="true"
+				android:fontFamily="sans-serif-medium"
+				android:text="@string/quick_sheet_tempo_more"
+				android:textColor="@color/tg_content_toggle"
+				android:textSize="14sp"/>
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:duplicateParentState="true"
+				android:importantForAccessibility="no"
+				android:src="@drawable/ic_chevron_right"
+				android:tint="@color/tg_content_toggle"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<!-- Page 2: beat unit + where the tempo applies (replaces page 1 in the same card) -->
+	<LinearLayout
+		android:id="@+id/tempo_popup_page_more"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:paddingLeft="13dp"
+		android:paddingRight="13dp"
+		android:visibility="gone">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<ImageButton
+				android:id="@+id/tempo_popup_back"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:background="@drawable/bg_popup_row"
+				android:contentDescription="@string/global_button_cancel"
+				android:src="@drawable/ic_tempo_back"
+				android:tint="?attr/colorOnSurface"/>
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginLeft="6dp"
+				android:fontFamily="sans-serif-medium"
+				android:text="@string/tempo_dlg_title"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="18sp"/>
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="5dp"
+			android:paddingTop="8dp"
+			android:paddingBottom="8dp"
+			android:fontFamily="sans-serif-medium"
+			android:text="@string/tempo_popup_beat"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			android:textSize="12sp"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_base_items"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_base_items_2"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="6dp"
+			android:orientation="horizontal"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="5dp"
+			android:paddingTop="16dp"
+			android:paddingBottom="8dp"
+			android:fontFamily="sans-serif-medium"
+			android:text="@string/tempo_popup_apply"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			android:textSize="12sp"/>
+
+		<LinearLayout
+			android:id="@+id/tempo_popup_apply_items"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"/>
+	</LinearLayout>
+</FrameLayout>

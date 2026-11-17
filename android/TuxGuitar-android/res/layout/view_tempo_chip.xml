@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="0dp"
+	android:layout_height="40dp"
+	android:layout_weight="1"
+	android:layout_marginLeft="3dp"
+	android:layout_marginRight="3dp"
+	android:background="@drawable/bg_tempo_chip"
+	android:fontFamily="sans-serif-medium"
+	android:gravity="center"
+	android:maxLines="1"
+	android:textColor="@color/tg_content_toggle"
+	android:textSize="13sp"/>
